@@ -1,0 +1,13 @@
+[Unit]
+Description=(not so) advanced key-value store
+Documentation=https://github.com/memcached/memcached/wiki, man:memcached(1)
+After=network.target
+
+[Service]
+Type=simple
+ExecStart=/usr/share/memcached/scripts/systemd-memcached-wrapper /etc/memcached.conf
+Restart=always
+RestartSec=5s
+
+[Install]
+WantedBy=multi-user.target
