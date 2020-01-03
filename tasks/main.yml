@@ -53,7 +53,7 @@
       mode: 0644
     notify: restart memcached
 
-  - name: Ensure memcached service is up.
+  - name: Ensure memcached systemd service is up.
     systemd:
       name: memcached
       enabled: yes
