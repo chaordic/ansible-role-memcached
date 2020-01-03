@@ -43,3 +43,20 @@
     name: memcached
     state: started
     enabled: yes
+  when: ansible_service_mgr != 'systemd'
+
+- block:
+  - name: Copy and parse memcached systemd unit file.
+    template:
+      src: memcached.service.j2
+      dest: /lib/systemd/system/memcached.service
+      mode: 0644
+    notify: restart memcached
+
+  - name: Ensure memcached service is up.
+    systemd:
+      name: memcached
+      enabled: yes
+      state: started
+      daemon_reload: yes
+  when: ansible_service_mgr == 'systemd'
